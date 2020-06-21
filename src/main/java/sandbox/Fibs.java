@@ -5,14 +5,11 @@ import io.reactivex.rxjava3.core.Observable;
 public class Fibs {
 
     static Observable<Integer> fibs() {
-        return Observable.concat(
-                Observable.just(0, 1),
-                Observable.defer(() ->
-                        fibs().buffer(2, 1)
-                                .flatMap(it ->
-                                        Observable.fromIterable(it)
-                                                .reduce(Integer::sum)
-                                                .toObservable())));
+        return Observable.just(0, 1)
+                .concatWith(Observable.defer(() -> fibs()
+                        .buffer(2, 1)
+                        .flatMapMaybe(it -> Observable.fromIterable(it)
+                                .reduce(Integer::sum))));
     }
 
     public static void main(String[] args) {
