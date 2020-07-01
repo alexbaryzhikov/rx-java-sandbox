@@ -7,9 +7,8 @@ public class Fibs {
     static Observable<Integer> fibs() {
         return Observable.just(0, 1)
                 .concatWith(Observable.defer(() -> fibs()
-                        .buffer(2, 1)
-                        .flatMapMaybe(it -> Observable.fromIterable(it)
-                                .reduce(Integer::sum))));
+                        .window(2, 1)
+                        .flatMapSingle(it -> it.reduce(0, Integer::sum))));
     }
 
     public static void main(String[] args) {
