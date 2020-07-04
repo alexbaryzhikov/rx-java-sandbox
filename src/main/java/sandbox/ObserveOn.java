@@ -3,7 +3,9 @@ package sandbox;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class ObserverOnTest {
+import static util.Utils.log;
+
+public class ObserveOn {
     public static void main(String[] args) throws InterruptedException {
         Observable<Integer> src = Observable.just(1, 2, 3)
                 .doOnNext(x -> log("Emit", x))
@@ -14,9 +16,5 @@ public class ObserverOnTest {
         t2.start();
         t1.join();
         t2.join();
-    }
-
-    private static void log(String prefix, Integer x) {
-        System.out.println(prefix + " " + x + " on " + Thread.currentThread().getName());
     }
 }
