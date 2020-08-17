@@ -33,4 +33,8 @@ public class Utils {
         } catch (InterruptedException ignored) {
         }
     }
+
+    public static int randomSleepTime(int from, int to) {
+        return from + ThreadLocalRandom.current().nextInt(to);
+    }
 }
