@@ -12,17 +12,17 @@ import static util.Utils.sleep;
 public class FailFast {
     public static void main(String[] args) {
         Disposable disposable = Single.just(0)
-                .flatMap(item -> Single.just("Alpha")
-                        .doOnSuccess(it -> log("SOURCE", "doOnSuccess " + it))
-                        .doOnError(it -> log("SOURCE", "doOnError " + it))
-                )
                 .flatMap(item -> Single.fromCallable(new Failure())
                         .doOnSuccess(it -> log("SOURCE", "doOnSuccess " + it))
                         .doOnError(it -> log("SOURCE", "doOnError " + it))
                 )
+                .flatMap(item -> Single.just("Alpha")
+                        .doOnSuccess(it -> log("SOURCE", "doOnSuccess " + it))
+                        .doOnError(it -> log("SOURCE", "doOnError " + it))
+                )
                 .subscribe(
-                        it -> log("SOURCE", "onSuccess " + it),
-                        it -> log("SOURCE", "onError " + it)
+                        it -> log("OBSERVER", "onSuccess " + it),
+                        it -> log("OBSERVER", "onError " + it)
                 );
 
         sleep(TimeUnit.SECONDS.toMillis(1));
