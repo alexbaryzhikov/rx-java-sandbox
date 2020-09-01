@@ -19,7 +19,7 @@ public class ToImmutableListTransformer {
 
     static <T> ObservableTransformer<T, ImmutableList<T>> toImmutableList() {
         return upstream -> upstream
-                .collect(ImmutableList::<T>builder, ImmutableList.Builder::add)
+                .<ImmutableList.Builder<T>>collect(ImmutableList::builder, ImmutableList.Builder::add)
                 .map(ImmutableList.Builder::build)
                 .toObservable();
     }
