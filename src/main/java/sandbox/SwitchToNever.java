@@ -8,7 +8,7 @@ import static util.Utils.*;
 
 public class SwitchToNever {
     public static void main(String[] args) {
-        Observable.interval(0, randomSleepTime(1000, 3000), TimeUnit.MILLISECONDS)
+        Observable.interval(0, randomLong(1000, 3000), TimeUnit.MILLISECONDS)
                 .doOnNext(it -> log("source", it))
                 .switchMap(it -> {
                     if (it % 3 != 0) {

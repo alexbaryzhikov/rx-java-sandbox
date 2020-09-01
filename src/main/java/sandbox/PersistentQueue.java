@@ -50,7 +50,7 @@ public class PersistentQueue {
      */
     private static void generateMessages(Repository repository) {
         for (int i = 0; i < 10; i++) {
-            sleep(randomSleepTime(0, 2000));
+            sleep(randomLong(0, 2000));
             repository.pushBack(new Message(i));
         }
     }
@@ -98,7 +98,7 @@ public class PersistentQueue {
          */
         void send(Message message) {
             log("SENDER", "Sending " + message);
-            sleep(randomSleepTime(100, 1000));
+            sleep(randomLong(100, 1000));
             if (ThreadLocalRandom.current().nextDouble(1.0) < SEND_SUCCESS_RATE) {
                 log("SENDER", "Done sending " + message);
             } else {

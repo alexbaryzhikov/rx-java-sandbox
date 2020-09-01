@@ -34,7 +34,11 @@ public class Utils {
         }
     }
 
-    public static int randomSleepTime(int from, int to) {
-        return from + ThreadLocalRandom.current().nextInt(to);
+    public static int randomInt(int from, int to) {
+        return ThreadLocalRandom.current().nextInt(from, to);
+    }
+
+    public static long randomLong(int from, int to) {
+        return ThreadLocalRandom.current().nextLong(from, to);
     }
 }

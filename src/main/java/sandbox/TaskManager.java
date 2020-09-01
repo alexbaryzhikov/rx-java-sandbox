@@ -24,11 +24,11 @@ public class TaskManager {
     private static void generateTasks(TaskManager taskManager) {
         Consumer<String> success = s -> {
             log("ACTION", "Process " + s);
-            sleep(randomSleepTime(10, 300));
+            sleep(randomLong(10, 300));
         };
         Consumer<String> failure = s -> {
             log("ACTION", "Process " + s);
-            sleep(randomSleepTime(10, 300));
+            sleep(randomLong(10, 300));
             throw new RuntimeException();
         };
         ResultHandler<String> handler = new ResultHandler<String>() {
