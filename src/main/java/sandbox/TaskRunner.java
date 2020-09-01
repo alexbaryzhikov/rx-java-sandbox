@@ -11,17 +11,17 @@ import java.util.function.Consumer;
 
 import static util.Utils.*;
 
-public class TaskManager {
+public class TaskRunner {
 
     public static void main(String[] args) {
-        TaskManager taskManager = new TaskManager();
-        taskManager.enable();
-        generateTasks(taskManager);
+        TaskRunner taskRunner = new TaskRunner();
+        taskRunner.enable();
+        generateTasks(taskRunner);
         sleep(TimeUnit.SECONDS.toMillis(2));
-        taskManager.disable();
+        taskRunner.disable();
     }
 
-    private static void generateTasks(TaskManager taskManager) {
+    private static void generateTasks(TaskRunner taskRunner) {
         Consumer<String> success = s -> {
             log("ACTION", "Process " + s);
             sleep(randomLong(10, 300));
@@ -61,7 +61,7 @@ public class TaskManager {
                     break;
             }
             Consumer<String> action = ThreadLocalRandom.current().nextDouble(1.0) < 0.8 ? success : failure;
-            taskManager.submit(groupId, value, action, handler);
+            taskRunner.submit(groupId, value, action, handler);
         }
     }
 
