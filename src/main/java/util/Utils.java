@@ -8,6 +8,15 @@ import java.util.concurrent.TimeUnit;
 public class Utils {
     private static final DateTimeFormatter f = DateTimeFormatter.ofPattern("hh:mm:ss.SSS");
 
+    public static <T> void log(T item) {
+        System.out.printf(
+                "%s [%s] %s%n",
+                LocalTime.now().format(f),
+                Thread.currentThread().getName(),
+                item
+        );
+    }
+
     public static <T> void log(String tag, T item) {
         System.out.printf(
                 "%s [%s] %s %s%n",
